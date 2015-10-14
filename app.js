@@ -29,7 +29,6 @@ global.App = {
 	if (!this.started){
 	    this.started = true;
 	    this.app.listen(this.port);
-	    this.app.use(express.static(this.root));
 	    console.log('Running node server version ' + this.version + ' on port ' + this.port + ' in env ' + this.env); 
 	}
     }
@@ -37,7 +36,8 @@ global.App = {
 
 
 // uncomment after placing your favicon in /public
-//App.app.use(favicon('/home/pietro/projects/webApp/angularClient/app/favico.ico'));
+App.app.use(express.static(App.root));
+App.app.use(favicon(App.appPath('favico.ico')));
 App.app.use(logger('dev'));
 App.app.use(bodyParser.json());
 App.app.use(bodyParser.urlencoded({ extended: false }));
