@@ -11,7 +11,7 @@
     //function authenticationInterceptor(
     
     function config($stateProvider, $urlRouterProvider, $httpProvider ){
-	$urlRouterProvider.otherwise("/home");
+	$urlRouterProvider.otherwise("/home/accueil");
 
 	$stateProvider
 	    .state("root", {
@@ -21,22 +21,22 @@
 		    "header": { templateUrl: "views/header.html" }
 		}
 	    })
-	    .state("root.home", {
-		url: "/home",
-		views: {
-		    "mainview@": { templateUrl: "views/mainview.html" }
-		}
-	    })
+	    // .state("root.home", {
+	    // 	url: "/home",
+	    // 	views: {
+	    // 	    "mainview@": { templateUrl: "components/astre/astre.html" }
+	    // 	}
+	    // })
 	    .state("root.members", {
 		url: "/membres",
 		views: {
-		    "mainview@": { templateUrl: "views/enconstruction.html" }
+		    "mainview@": { templateUrl: "views/members.html" }
 		}
 	    })
 	    .state("root.contact", {
 		url: "/contact",
 		views: {
-		    "mainview@": { templateUrl: "views/enconstruction.html" }
+		    "mainview@": { templateUrl: "components/astre/views/contact.html" }
 		}
 	    })
 	    .state("root.links", {

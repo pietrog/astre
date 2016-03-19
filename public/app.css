@@ -5,6 +5,26 @@
 
 
 body {
-    background-color: #FEE7F0;
+    background-color: #CEECF5;
     
+}
+
+.jumbotron{
+    background-color: #A4F3F3;
+
+}
+
+.ulclass{
+    padding: 15px;        
+}
+
+.ulclass li{
+    padding: 10px;
+}
+
+.panel-body{
+    background-color: #CEECF5;
+}
+.panel-footer{
+    background-color: #CEECF5;
 }
