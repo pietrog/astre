@@ -1,5 +1,5 @@
 module.exports = {
 
-    'secret' : 'silvio',
-    'database' : 'mongodb://localhost:27017/'
+    'secret' : 'astreWebSite',
+    'database' : 'mongodb://localhost:27017/astreDB'
 }

@@ -3,30 +3,37 @@
     'use strict';
     
     // Declare app level module which depends on views, and components
-    angular.module('astre', ['ui.router']);
+    angular.module('astre', ['ui.router',
+			     'LocalStorageModule',
+			     'pietro.authentication',
+			     'reports']);
 
     angular.module('astre')
     	.config(config);
 
     //function authenticationInterceptor(
     
-    function config($stateProvider, $urlRouterProvider, $httpProvider ){
+    function config($stateProvider, $urlRouterProvider, $httpProvider, localStorageServiceProvider ){
 	$urlRouterProvider.otherwise("/home/accueil");
+	localStorageServiceProvider.setPrefix('astre');
+	localStorageServiceProvider.setStorageType('windowStorage');
+
+	//add interceptor for authentication management
+	$httpProvider.interceptors.push('AuthenticationInterceptorFactory');
 
 	$stateProvider
 	    .state("root", {
 		url: '',
 		abstract: true,
 		views: {
-		    "header": { templateUrl: "views/header.html" }
+		    "header": { templateUrl: "views/header.html" },
+		    "loginPart":{
+			templateUrl: "components/authentication/views/login.html",
+			controller: "UserLoginCtrl",
+			controllerAs: "loginCtrl"
+		    }
 		}
 	    })
-	    // .state("root.home", {
-	    // 	url: "/home",
-	    // 	views: {
-	    // 	    "mainview@": { templateUrl: "components/astre/astre.html" }
-	    // 	}
-	    // })
 	    .state("root.members", {
 		url: "/membres",
 		views: {

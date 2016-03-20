@@ -11,6 +11,7 @@ var env         = process.env.NODE_ENV || 'development',
     tools       = require('./app/tools'),
     packageJson = require('./package.json'),
     routes = require('./app/routes/index'),
+    reportRoute = require('./app/routes/report'),
     config = require('./app/config/config.js');
 
 global.App = {
@@ -36,6 +37,7 @@ global.App = {
 
 
 // uncomment after placing your favicon in /public
+mongoose.connect(config.database);
 App.app.use(express.static(App.root));
 App.app.use(favicon(App.appPath('favico.ico')));
 App.app.use(logger('dev'));
@@ -44,5 +46,33 @@ App.app.use(bodyParser.urlencoded({ extended: false }));
 
 
 App.app.use('/', routes);
+App.app.use('/report', reportRoute);
+/**
+ * Check token based authorization
+ */
+App.app.use(function(req, res, next){
+    
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token){
+	jwt.verify(token, App.app.get('superSecret'), function(err, decoded){
+	    if (err){
+		console.log("error token: "+ err.toString());
+		return res.status(401).json({success: false, message: 'Failed to authenticate token'});
+	    }
+	    else{
+		//console.log('OKAYYY TOKEN !!' + decoded.toString());
+		req.decodedToken = decoded;
+		next();
+	    }
+	});
+    }
+    else{
+
+	return res.status(401).send("Ressource non autorisée");
+    }
+});
+
+
+
 
 module.exports = App;
