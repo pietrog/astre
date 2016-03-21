@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../model/users.js');
 var app = require('../../app.js');
 var jwt = require('jsonwebtoken');
+var httphandler = require('../httpHandler.js');
+var Event = require('../model/events');
 
 /* GET home page. */
 /*router.get('*', function(req, res) {
@@ -11,33 +12,27 @@ var jwt = require('jsonwebtoken');
 
 //authenticate a user
 router.post('/authenticate', function(req, res){
-    User.findOne({
-	name : req.body.name
-    }, function(err, user){
-	if (err) throw err;
 
-	if (!user){
-	    res.json({ success : false, message: 'User ' + req.body.name + ' not found !!'});
-	}
-	else{
-	    if (user.password != req.body.password){
-		
-		res.status(401).json({ success : false, message: 'Authentication failed. Wrong password !' });
-	    }
-	    else{
-		var profil = {
-		    user: user.name,
-		    email: "coucou@ili.ki",
-		    id: user.id
-		};
-
-		var token = jwt.sign(profil, App.app.get('superSecret'), { expiresInMinutes : 5 });
-		
-		res.json({ success : true, message : "Authentication successed ! ", token: token, access: {}});
-	    }
-	}
-    })
+    //httphandler.answerJSonWithHTTPCode(res, 401, 'Utilisateur  inexistant');
+    if (req.body.name == "admin" && req.body.password == "astre2016"){
+	var token = jwt.sign({name: "admin"}, 'superSecret', { expiresIn : 10000 });
+	console.log("CONNEXION " + req.body.name);
+	httphandler.answerJSonSuccess(res, { success : true,
+					     data : "Authentication successed ! ",
+					     token: token
+					   });
+    }
+    else
+	httphandler.answerJSonWithHTTPCode(res, 401, 'Utilisateur inexistant');
 });
 
+router.get('/events', function(req, res){
+    Event.find(function(err, events){
+	if (err)
+	    httphandler.answerJSonFailure(res, err.toString());
+	else
+	    httphandler.answerJSonSuccess(res, events);
+    });
+});
 
 module.exports = router;

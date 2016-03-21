@@ -1,7 +1,7 @@
 (function(){
     'use strict';
 
-    angular.module('reports')
+    angular.module('admin')
 	.controller('ReportShowCtrl', ctrl);
 
     function ctrl($stateParams, ReportFactory){

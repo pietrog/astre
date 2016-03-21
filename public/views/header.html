@@ -8,28 +8,29 @@
 	<li><a ui-sref="root.members">Liste des membres</a></li>
 	<li><a ui-sref="root.contact">Nous contacter</a></li>
 	<li><a ui-sref="root.links">Liens utiles</a></li>
-	<li><a ui-sref="root.links">A venir</a></li>
+	<li><a ui-sref="root.showReports">A venir</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
 	<li ng-show="!astrectrl.user.isAuthenticated()">
 	  <a data-toggle="modal" data-target="#myModal">
-	    <span class="glyphicon glyphicon-log-in"> S'identifier</span> 
+	    <span class="glyphicon glyphicon-log-in"></span> 
 	  </a>
 	</li>
 	
+
 	<li ng-show="astrectrl.user.isAuthenticated()" >
-	  <a ui-sref="root.logout" ng-click="astrectrl.auth.logout()">
-	    <span class="glyphicon glyphicon-log-out"> Quitter</span> 
+	  <a ui-sref="root.admin" ng-click="">
+	    <span class="glyphicon glyphicon-eye-open"></span> 
 	  </a>
 	</li>
 
-	<li ng-show="!astrectrl.user.isAuthenticated()" >
-	  <a ui-sref="root.report" ng-click="">
-	    <span class="glyphicon"> Compte-rendus</span> 
+	<li ng-show="astrectrl.user.isAuthenticated()" >
+	  <a ui-sref="root.logout" ng-click="astrectrl.auth.logout()">
+	    <span class="glyphicon glyphicon-log-out"></span> 
 	  </a>
 	</li>
-	
+
       </ul>
 
     </div>

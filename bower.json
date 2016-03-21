@@ -6,7 +6,7 @@
     "license": "MIT",
     "private": true,
     "dependencies": {
-	"angular": "~1.4.0",
+	"angular": "latest",
 	"angular-ui-router": "latest",
 	"angular-loader": "~1.4.0",
 	"angular-mocks": "~1.4.0",

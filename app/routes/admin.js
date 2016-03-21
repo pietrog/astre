@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../model/users.js');
 var Report = require('../model/report.js');
 var httphandler = require('../httpHandler.js');
-
+var Event = require('../model/events');
 
 router.get('/all', function(req, res){
     Report.find(function(err, cptsrendus){
@@ -37,6 +36,27 @@ router.post('/createReport', function(req, res){
     });
     console.log("la: " + req.body);
     cpt.save(function(err, cpt, nbAffected){
+	if (err)
+	    httphandler.answerJSonFailure(res, err.toString());
+	else
+	    httphandler.answerJSonSuccess(res, "ddddddd");
+
+    });
+
+});
+
+/**
+  * Create a new cpt rendu
+  */
+router.post('/createEvent', function(req, res){
+    var event = new Event({
+	description: req.body.description,
+	event_date_occur: req.body.date_occur,
+	event_date_added: new Date(),
+	content: req.body.content
+    });
+
+    event.save(function(err, cpt, nbAffected){
 	if (err)
 	    httphandler.answerJSonFailure(res, err.toString());
 	else
