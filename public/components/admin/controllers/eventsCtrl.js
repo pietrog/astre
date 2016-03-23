@@ -15,7 +15,7 @@
 	);
 	
 	vm.show = function(id){
-	    $state.go('root.showReports', {id:  id });
+	    $state.go('root.showEvent', {id:  id });
 	}
 
 

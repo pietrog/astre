@@ -16,6 +16,13 @@
 		    "mainview@" : { templateUrl: "components/admin/admin.html" }
 		}
 	    })
+	    .state('root.admin.showReport', {
+		url: "/show/:id",
+		templateUrl: "components/admin/views/show.html",
+		controller: "ReportShowCtrl",
+		controllerAs: "ctrl"
+	    })
+
 	    .state('root.admin.reports', {
 		url: "/all",
 		templateUrl: "components/admin/views/all.html",
@@ -34,8 +41,14 @@
 		controller: "ReportCreateCtrl",
 		controllerAs: "ctrl"
 	    })
-	    .state("root.showReports", {
-		url: "/report/:id",
+	    .state('root.admin.showReports', {
+		url: "/all",
+		templateUrl: "components/admin/views/all.html",
+		controller: "ReportCtrl",
+		controllerAs: "ctrl"
+	    })
+	    .state("root.showEvents", {
+		url: "/events",
 		views: {
 		    "mainview@": { templateUrl: "components/admin/views/allEvents.html",
 				   controller: "EventsCtrl",
@@ -43,6 +56,16 @@
 		}
 		
 	    })
+	    .state("root.showEvent", {
+		url: "/event/:id",
+		views: {
+		    "mainview@": { templateUrl: "components/admin/views/showEvent.html",
+				   controller: "EventsCtrl",
+				   controllerAs: "ctrl"}
+		}
+		
+	    })
+
 
 
 	

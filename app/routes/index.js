@@ -5,10 +5,6 @@ var jwt = require('jsonwebtoken');
 var httphandler = require('../httpHandler.js');
 var Event = require('../model/events');
 
-/* GET home page. */
-/*router.get('*', function(req, res) {
-    res.sendFile('/home/pietro/projects/webApp/angularClient/app/index.html');
-});*/
 
 //authenticate a user
 router.post('/authenticate', function(req, res){
@@ -28,10 +24,12 @@ router.post('/authenticate', function(req, res){
 
 router.get('/events', function(req, res){
     Event.find(function(err, events){
+	
 	if (err)
 	    httphandler.answerJSonFailure(res, err.toString());
-	else
+	else{
 	    httphandler.answerJSonSuccess(res, events);
+	}
     });
 });
 

@@ -15,7 +15,7 @@
 	);
 	
 	vm.show = function(id){
-	    $state.go('root.admin.showReports', {id:  id });
+	    $state.go('root.admin.showReport', {id:  id });
 	}
 
 

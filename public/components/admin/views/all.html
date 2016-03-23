@@ -16,7 +16,7 @@
     <tbody>
       <tr ng-repeat="item in ctrl.all" ng-click="ctrl.show(item._id)" >
 	<td>{{item.description}}</td>
-	<td>{{item.report_date}}</td>
+	<td>{{item.report_date | date: 'yyyy-MM-dd'}}</td>
       </tr>
     </tbody>
   </table>
