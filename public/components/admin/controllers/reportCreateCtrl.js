@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('reports').controller('ReportCreateCtrl', controller);
+    angular.module('admin').controller('ReportCreateCtrl', controller);
     
 
     function controller($state, $rootScope, ReportFactory, UserAuthFactory){
@@ -22,6 +22,20 @@
 		);
 	    }
 	}
+
+	vm.createEvent = function(){
+	    if (vm.report.description){
+		ReportFactory.createEvent(vm.report).then(
+		    function(res){
+			vm.result = res;
+		    },
+		    function(res){
+			vm.result = res;
+		    }
+		);
+	    }
+	}
+
     }
 
 })()

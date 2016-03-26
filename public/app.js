@@ -6,7 +6,7 @@
     angular.module('astre', ['ui.router',
 			     'LocalStorageModule',
 			     'pietro.authentication',
-			     'reports']);
+			     'admin']);
 
     angular.module('astre')
     	.config(config);

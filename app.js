@@ -11,7 +11,7 @@ var env         = process.env.NODE_ENV || 'development',
     tools       = require('./app/tools'),
     packageJson = require('./package.json'),
     routes = require('./app/routes/index'),
-    reportRoute = require('./app/routes/report'),
+    adminRoutes = require('./app/routes/admin'),
     config = require('./app/config/config.js');
 
 global.App = {
@@ -46,7 +46,7 @@ App.app.use(bodyParser.urlencoded({ extended: false }));
 
 
 App.app.use('/', routes);
-App.app.use('/report', reportRoute);
+
 /**
  * Check token based authorization
  */
@@ -54,7 +54,7 @@ App.app.use(function(req, res, next){
     
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (token){
-	jwt.verify(token, App.app.get('superSecret'), function(err, decoded){
+	jwt.verify(token, 'superSecret', function(err, decoded){
 	    if (err){
 		console.log("error token: "+ err.toString());
 		return res.status(401).json({success: false, message: 'Failed to authenticate token'});
@@ -71,7 +71,7 @@ App.app.use(function(req, res, next){
 	return res.status(401).send("Ressource non autorisée");
     }
 });
-
+App.app.use('/admin', adminRoutes);
 
 
 
