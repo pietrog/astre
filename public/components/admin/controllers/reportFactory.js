@@ -7,8 +7,11 @@
 		create: create,
 		getAll: getAll,
 		getById: getById,
+		getByEventId: getByEventId,
 		createEvent: createEvent,
-		getAllEvents: getAllEvents
+		getAllEvents: getAllEvents,
+		removeReport: remRpt,
+		removeEvent: remEvent
 	    };
 
 	    return fact;
@@ -36,6 +39,18 @@
 
 	    function getById(id){
 		return $http.get('/admin/show/'+id);
+	    }
+
+	    function getByEventId(id){
+		return $http.get('/showevent/'+id);
+	    }
+	    
+	    function remRpt(id){
+		return $http.delete('/admin/delreport/'+id);
+	    }
+
+	    function remEvent(id){
+		return $http.delete('/admin/delevent/'+id);
 	    }
 
 	});

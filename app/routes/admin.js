@@ -5,11 +5,14 @@ var httphandler = require('../httpHandler.js');
 var Event = require('../model/events');
 
 router.get('/all', function(req, res){
-    Report.find(function(err, cptsrendus){
+    var query = Report.find();
+    query.sort({ report_date: -1 });
+    query.exec(function(err, cptsrendus){
 	if (err)
 	    httphandler.answerJSonFailure(res, err.toString());	
-	else
+	else{
 	    httphandler.answerJSonSuccess(res, cptsrendus);
+	}
     });
 });
 
@@ -60,10 +63,41 @@ router.post('/createEvent', function(req, res){
 	if (err)
 	    httphandler.answerJSonFailure(res, err.toString());
 	else
-	    httphandler.answerJSonSuccess(res, "ddddddd");
+	    httphandler.answerJSonSuccess(res, "Evenement sauvegardé");
 
     });
 
+});
+
+
+router.delete('/delreport/:reportid', function(req, res){
+    Report.remove({ _id: req.params.reportid }, function(err, obj){
+	if (err)
+	    httpHandler.answerJSonFailure(res, err.toString());
+	else{
+	    var query = Report.find();
+	    query.sort({ report_date: -1 });
+	    query.exec(function(err, cptsrendus){
+		httphandler.answerJSonSuccess(res, cptsrendus);
+	    
+	    })
+	}	      
+    });
+});
+
+router.delete('/delevent/:eventid', function(req, res){
+    Event.remove({ _id: req.params.eventid }, function(err, obj){
+	if (err)
+	    httpHandler.answerJSonFailure(res, err.toString());
+	else{
+	    var query = Event.find();
+	    query.sort({ event_date_occur: -1 });
+	    query.exec(function(err, events){
+		httphandler.answerJSonSuccess(res, events);
+	    
+	    })
+	}	      
+    });
 });
 
 

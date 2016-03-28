@@ -18,7 +18,14 @@
 	    $state.go('root.showEvent', {id:  id });
 	}
 
+	vm.removeEvent = function(id){
+	    if (confirm('Etes-vous sûr de vouloir supprimer cet évènement ?')){
+		ReportFactory.removeEvent(id).then(function(res){
+		    vm.all = res.data.data;
+		});
+	    }
 
+	}
     }
 
 })()

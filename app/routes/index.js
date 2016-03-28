@@ -23,13 +23,26 @@ router.post('/authenticate', function(req, res){
 });
 
 router.get('/events', function(req, res){
-    Event.find(function(err, events){
-	
+    var query = Event.find();
+    query.sort({ event_date_occur: -1 });
+    query.exec(function(err, events){
 	if (err)
 	    httphandler.answerJSonFailure(res, err.toString());
 	else{
 	    httphandler.answerJSonSuccess(res, events);
 	}
+    });
+});
+
+router.get('/showevent/:id', function(req, res){
+    console.log("show event  " + req.params.id);
+    Event.findOne(
+	{ _id: req.params.id},
+	function(err, event){
+	if (err)
+	    httphandler.answerJSonFailure(res, err.toString());	
+	else
+	    httphandler.answerJSonSuccess(res, event);
     });
 });
 

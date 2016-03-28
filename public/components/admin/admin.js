@@ -41,6 +41,13 @@
 		controller: "ReportCreateCtrl",
 		controllerAs: "ctrl"
 	    })
+	    .state("root.admin.adminevents", {
+		url: "/allEventsAdm",
+		templateUrl: "components/admin/views/allEventsAdm.html",
+		controller: "EventsCtrl",
+		controllerAs: "ctrl"
+	    })
+
 	    .state('root.admin.showReports', {
 		url: "/all",
 		templateUrl: "components/admin/views/all.html",
@@ -60,7 +67,7 @@
 		url: "/event/:id",
 		views: {
 		    "mainview@": { templateUrl: "components/admin/views/showEvent.html",
-				   controller: "EventsCtrl",
+				   controller: "EventShowCtrl",
 				   controllerAs: "ctrl"}
 		}
 		

@@ -1,0 +1,19 @@
+<div class="jumbotron">
+  <div class="container">
+    <h2>{{ctrl.current.description}}</h2>
+    <small>ajouté le {{ctrl.current.event_date_added | date: 'yyyy-MM-dd'}}</small>
+  </div>
+</div>
+
+<div class="container pagination-centered">
+
+  <div class="panel panel-warning">
+    <div class="panel-header">
+      Cet évènement aura lieu le {{ctrl.current.event_date_occur | date: 'yyyy-MM-dd'}}
+    </div>
+    <div class="panel-body">
+      {{ctrl.current.content}}
+    </div>
+  </div>
+</div>
+

@@ -14,10 +14,10 @@
 	    if (vm.report.description){
 		ReportFactory.create(vm.report).then(
 		    function(res){
-			vm.result = res;
+			$state.go('root.admin.showReports');
 		    },
 		    function(res){
-			vm.result = res;
+			vm.result = "Un problème est survenu, compte rendu non créé...";
 		    }
 		);
 	    }
@@ -27,10 +27,10 @@
 	    if (vm.report.description){
 		ReportFactory.createEvent(vm.report).then(
 		    function(res){
-			vm.result = res;
+			$state.go('root.admin.adminevents');
 		    },
 		    function(res){
-			vm.result = res;
+			vm.result = "Un problème est survenu, évènement non créé...";
 		    }
 		);
 	    }

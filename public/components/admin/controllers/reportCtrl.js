@@ -18,6 +18,13 @@
 	    $state.go('root.admin.showReport', {id:  id });
 	}
 
+	vm.removeReport = function(id){
+	    if (confirm('Etes-vous sûr de vouloir supprimer ce rapport ?')){
+		ReportFactory.removeReport(id).then(function(res){
+		    vm.all = res.data.data;
+		});
+	    }
+	};
 
     }
 
